@@ -40,10 +40,13 @@ wmic qce
 ```
 Get-HotFix | ft -AutoSize
 ```
-### View installed programs
+## View installed programs
+### CMD
+
 ```
 wmic product get name
 ```
+### Powershell
 ```
 Get-WmiObject -Class Win32_Product |  select Name, Version
 ```
@@ -74,4 +77,24 @@ net localgroup "administrators"
 ```
 net 
 ```
-
+# Enumerating Network Services
+## Listing Named Pipes with Pipelist
+### Powershell
+```
+gci \\.\pipe\
+```
+### CMD
+```
+pipelist.exe /accepteula
+```
+### Reviewing LSASS Named Pipe Permissions
+```
+accesschk64.exe /accepteula \\.\Pipe\lsass -v
+```
+### Checking WindscribeService Named Pipe Permissions
+```
+accesschk64.exe -w \pipe\* -v
+```
+```
+accesschk64.exe -accepteula -w \pipe\WindscribeService -v
+```
